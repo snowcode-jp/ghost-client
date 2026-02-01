@@ -1,0 +1,22 @@
+[package]
+name = "ghost-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "CLI tool for Ghost security monitoring"
+
+[[bin]]
+name = "ghost"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+anyhow = { workspace = true }
+clap = { workspace = true }
+reqwest = { workspace = true }
+colored = "2"
+tabled = "0.15"

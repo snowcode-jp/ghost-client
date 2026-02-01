@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API設定 - Ghost Security Monitor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .api-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .api-card.free {
+            border-left: 4px solid #22c55e;
+        }
+
+        .api-card.optional {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .api-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .api-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .api-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .api-badge.free {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .api-badge.optional {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .api-badge.configured {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .api-description {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .api-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .api-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .api-feature::before {
+            content: "✓";
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .api-limits {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .api-limits-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .api-limits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .api-limits-list li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .api-tips {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .api-tips-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3b82f6;
+        }
+
+        .api-tips-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .api-tips-list li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .api-tips-list li::before {
+            content: "💡 ";
+        }
+
+        .api-key-form {
+            margin-top: 16px;
+        }
+
+        .api-key-input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .api-key-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: monospace;
+        }
+
+        .api-key-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .api-key-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .btn-save {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-save:hover {
+            background: #2563eb;
+        }
+
+        .btn-save:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .btn-register {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .btn-register:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #3b82f6;
+        }
+
+        .usage-meter {
+            margin-top: 16px;
+        }
+
+        .usage-meter-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+        }
+
+        .usage-meter-label {
+            color: var(--text-secondary);
+        }
+
+        .usage-meter-value {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .usage-meter-bar {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .usage-meter-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .usage-meter-fill.safe {
+            background: #22c55e;
+        }
+
+        .usage-meter-fill.warning {
+            background: #f59e0b;
+        }
+
+        .usage-meter-fill.danger {
+            background: #ef4444;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .icon {
+            font-size: 1.25rem;
+        }
+
+        .config-summary {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .summary-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .env-vars-example {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+            overflow-x: auto;
+        }
+
+        .env-vars-title {
+            color: #888;
+            font-size: 0.875rem;
+            margin-bottom: 12px;
+        }
+
+        .env-vars-code {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.875rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .env-vars-code .comment {
+            color: #6a9955;
+        }
+
+        .env-vars-code .key {
+            color: #9cdcfe;
+        }
+
+        .env-vars-code .value {
+            color: #ce9178;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- サイドバー -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">👻</span>
+                <span class="logo-text">Ghost</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span>ダッシュボード</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="alerts.html" class="nav-link">
+                        <span class="nav-icon">🚨</span>
+                        <span>アラート</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="crypto.html" class="nav-link">
+                        <span class="nav-icon">🔐</span>
+                        <span>暗号監査</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="reports.html" class="nav-link">
+                        <span class="nav-icon">📝</span>
+                        <span>レポート</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="api-settings.html" class="nav-link">
+                        <span class="nav-icon">🔧</span>
+                        <span>API設定</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <header class="header">
+                <h1>API設定</h1>
+                <p class="subtitle">脅威インテリジェンスAPIの設定と使用状況</p>
+            </header>
+
+            <!-- 設定サマリー -->
+            <div class="config-summary">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-value" id="total-apis">4</div>
+                        <div class="summary-label">利用可能なAPI</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" style="color: #22c55e;" id="free-apis">2</div>
+                        <div class="summary-label">無料で使えるAPI</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" style="color: #3b82f6;" id="configured-apis">0</div>
+                        <div class="summary-label">設定済みAPI</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 無料APIセクション -->
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="icon">🆓</span>
+                    無料で使えるAPI（APIキー不要・無制限）
+                </h2>
+
+                <!-- NVD -->
+                <div class="api-card free">
+                    <div class="api-card-header">
+                        <div>
+                            <h3 class="api-card-title">NVD (National Vulnerability Database)</h3>
+                            <p class="api-description">
+                                米国国立標準技術研究所（NIST）が運営するCVE脆弱性データベース。
+                                世界で最も包括的な脆弱性情報源です。
+                            </p>
+                        </div>
+                        <span class="api-badge free">無料・無制限</span>
+                    </div>
+                    <div class="api-features">
+                        <div class="api-feature">CVE IDによる脆弱性検索</div>
+                        <div class="api-feature">キーワード検索</div>
+                        <div class="api-feature">製品名・ベンダー名での検索</div>
+                        <div class="api-feature">CVSSスコアによる深刻度評価</div>
+                        <div class="api-feature">最新の脆弱性情報取得</div>
+                    </div>
+                    <a href="https://nvd.nist.gov/" target="_blank" class="btn-register">
+                        <span>🌐</span> 公式サイトを開く
+                    </a>
+                </div>
+
+                <!-- OSV.dev -->
+                <div class="api-card free">
+                    <div class="api-card-header">
+                        <div>
+                            <h3 class="api-card-title">OSV.dev (Open Source Vulnerabilities)</h3>
+                            <p class="api-description">
+                                Googleが運営するオープンソース脆弱性データベース。
+                                npm, PyPI, crates.io, Go など主要なエコシステムの脆弱性情報をリアルタイムで提供します。
+                            </p>
+                        </div>
+                        <span class="api-badge free">無料・無制限</span>
+                    </div>
+                    <div class="api-features">
+                        <div class="api-feature">パッケージ名・バージョンによる脆弱性検索</div>
+                        <div class="api-feature">npm, PyPI, crates.io, Go 対応</div>
+                        <div class="api-feature">GitHub Advisory と連携</div>
+                        <div class="api-feature">Linux, Debian, Ubuntu のOS脆弱性対応</div>
+                        <div class="api-feature">リアルタイム更新</div>
+                    </div>
+                    <a href="https://osv.dev/" target="_blank" class="btn-register">
+                        <span>🌐</span> 公式サイトを開く
+                    </a>
+                </div>
+            </section>
+
+            <!-- オプションAPIセクション -->
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="icon">🔑</span>
+                    オプションAPI（無料枠あり・ユーザー登録が必要）
+                </h2>
+
+                <!-- AbuseIPDB -->
+                <div class="api-card optional">
+                    <div class="api-card-header">
+                        <div>
+                            <h3 class="api-card-title">AbuseIPDB</h3>
+                            <p class="api-description">
+                                悪意のあるIPアドレスを検出するためのサービス。
+                                不正アクセス、ブルートフォース攻撃、スパムなどの報告を元に、IPの信頼性を評価します。
+                            </p>
+                        </div>
+                        <div>
+                            <span class="api-badge optional">無料枠あり</span>
+                            <span class="api-badge configured" id="abuseipdb-status" style="display: none;">設定済み</span>
+                        </div>
+                    </div>
+
+                    <div class="api-features">
+                        <div class="api-feature">IPアドレスの悪用スコア確認</div>
+                        <div class="api-feature">国・ISP情報の取得</div>
+                        <div class="api-feature">過去90日間の報告履歴</div>
+                        <div class="api-feature">攻撃タイプの分類</div>
+                    </div>
+
+                    <div class="api-limits">
+                        <div class="api-limits-title">📊 無料プランの制限</div>
+                        <ul class="api-limits-list">
+                            <li>✅ 1日1,000リクエストまで（1時間あたり約41件）</li>
+                            <li>✅ 個人利用には十分な量</li>
+                            <li>❌ 一括チェックは不可</li>
+                        </ul>
+                    </div>
+
+                    <div class="api-tips">
+                        <div class="api-tips-title">効率的な使い方</div>
+                        <ul class="api-tips-list">
+                            <li>重要なIPのみをチェックすることで無料枠内で十分運用可能</li>
+                            <li>ログインに失敗したIPを優先的にチェック</li>
+                            <li>キャッシュを活用して同じIPの重複チェックを避ける</li>
+                        </ul>
+                    </div>
+
+                    <div class="api-key-form">
+                        <div class="api-key-input-group">
+                            <input type="password" class="api-key-input" id="abuseipdb-key"
+                                   placeholder="APIキーを入力（例: a1b2c3d4e5f6...）">
+                            <button class="btn-save" onclick="saveApiKey('abuseipdb')">保存</button>
+                        </div>
+                        <a href="https://www.abuseipdb.com/register" target="_blank" class="btn-register">
+                            <span>📝</span> 無料アカウント登録（APIキー取得）
+                        </a>
+                    </div>
+
+                    <div class="usage-meter" id="abuseipdb-usage" style="display: none;">
+                        <div class="usage-meter-header">
+                            <span class="usage-meter-label">本日の使用量</span>
+                            <span class="usage-meter-value"><span id="abuseipdb-used">0</span> / 1,000</span>
+                        </div>
+                        <div class="usage-meter-bar">
+                            <div class="usage-meter-fill safe" id="abuseipdb-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VirusTotal -->
+                <div class="api-card optional">
+                    <div class="api-card-header">
+                        <div>
+                            <h3 class="api-card-title">VirusTotal</h3>
+                            <p class="api-description">
+                                70以上のアンチウイルスエンジンでファイル、URL、IP、ドメインをスキャン。
+                                マルウェアの検出に最も信頼性の高いサービスです。
+                            </p>
+                        </div>
+                        <div>
+                            <span class="api-badge optional">無料枠あり</span>
+                            <span class="api-badge configured" id="virustotal-status" style="display: none;">設定済み</span>
+                        </div>
+                    </div>
+
+                    <div class="api-features">
+                        <div class="api-feature">70以上のアンチウイルスエンジンでスキャン</div>
+                        <div class="api-feature">ファイルハッシュ、URL、IP、ドメインの分析</div>
+                        <div class="api-feature">詳細な検出結果とレポート</div>
+                        <div class="api-feature">コミュニティコメント</div>
+                    </div>
+
+                    <div class="api-limits">
+                        <div class="api-limits-title">📊 無料プランの制限</div>
+                        <ul class="api-limits-list">
+                            <li>✅ 1日500リクエストまで（1時間あたり約20件）</li>
+                            <li>✅ 1分4リクエストまで（15秒に1回）</li>
+                            <li>✅ ファイルアップロードは32MBまで</li>
+                            <li>❌ 商用利用には有料プランが必要</li>
+                        </ul>
+                    </div>
+
+                    <div class="api-tips">
+                        <div class="api-tips-title">効率的な使い方</div>
+                        <ul class="api-tips-list">
+                            <li>無料枠では1分4リクエストの制限があるため、バッチ処理ではなく重要なもののみをスキャン</li>
+                            <li>同じファイル/URLは結果がキャッシュされるため、重複チェックを避ける</li>
+                            <li>ファイルはハッシュで先に検索し、新規の場合のみアップロード</li>
+                            <li>夜間の自動スキャンで日次枠を有効活用</li>
+                        </ul>
+                    </div>
+
+                    <div class="api-key-form">
+                        <div class="api-key-input-group">
+                            <input type="password" class="api-key-input" id="virustotal-key"
+                                   placeholder="APIキーを入力（例: a1b2c3d4e5f6...）">
+                            <button class="btn-save" onclick="saveApiKey('virustotal')">保存</button>
+                        </div>
+                        <a href="https://www.virustotal.com/gui/join-us" target="_blank" class="btn-register">
+                            <span>📝</span> 無料アカウント登録（APIキー取得）
+                        </a>
+                    </div>
+
+                    <div class="usage-meter" id="virustotal-usage" style="display: none;">
+                        <div class="usage-meter-header">
+                            <span class="usage-meter-label">本日の使用量</span>
+                            <span class="usage-meter-value"><span id="virustotal-used">0</span> / 500</span>
+                        </div>
+                        <div class="usage-meter-bar">
+                            <div class="usage-meter-fill safe" id="virustotal-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 環境変数での設定 -->
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="icon">💻</span>
+                    環境変数での設定（サーバー管理者向け）
+                </h2>
+
+                <div class="api-card">
+                    <p class="api-description">
+                        APIキーは環境変数でも設定できます。これはサーバーを直接管理している場合に推奨される方法です。
+                    </p>
+
+                    <div class="env-vars-example">
+                        <div class="env-vars-title"># ~/.bashrc または /etc/environment に追加</div>
+                        <pre class="env-vars-code"><span class="comment"># 無料API（設定不要）</span>
+<span class="comment"># NVD と OSV.dev は APIキー不要で無制限に利用可能</span>
+
+<span class="comment"># オプションAPI（無料枠あり）</span>
+<span class="key">export GHOST_ABUSEIPDB_KEY</span>=<span class="value">"your-abuseipdb-api-key"</span>
+<span class="key">export GHOST_VIRUSTOTAL_KEY</span>=<span class="value">"your-virustotal-api-key"</span>
+</pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // APIキーの保存
+        function saveApiKey(apiName) {
+            const input = document.getElementById(`${apiName}-key`);
+            const key = input.value.trim();
+
+            if (!key) {
+                alert('APIキーを入力してください');
+                return;
+            }
+
+            // ローカルストレージに保存（本番環境ではサーバーに送信）
+            localStorage.setItem(`ghost_${apiName}_key`, key);
+
+            // ステータス更新
+            document.getElementById(`${apiName}-status`).style.display = 'inline-block';
+            document.getElementById(`${apiName}-usage`).style.display = 'block';
+
+            // 設定済みAPI数を更新
+            updateConfiguredCount();
+
+            alert(`${apiName.toUpperCase()} のAPIキーを保存しました`);
+            input.value = '';
+        }
+
+        // 設定済みAPI数を更新
+        function updateConfiguredCount() {
+            let count = 0;
+            if (localStorage.getItem('ghost_abuseipdb_key')) count++;
+            if (localStorage.getItem('ghost_virustotal_key')) count++;
+            document.getElementById('configured-apis').textContent = count;
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 保存済みキーのチェック
+            if (localStorage.getItem('ghost_abuseipdb_key')) {
+                document.getElementById('abuseipdb-status').style.display = 'inline-block';
+                document.getElementById('abuseipdb-usage').style.display = 'block';
+            }
+            if (localStorage.getItem('ghost_virustotal_key')) {
+                document.getElementById('virustotal-status').style.display = 'inline-block';
+                document.getElementById('virustotal-usage').style.display = 'block';
+            }
+
+            updateConfiguredCount();
+
+            // 使用量の取得（デモ用のダミーデータ）
+            // 本番環境ではAPIから取得
+            setTimeout(() => {
+                updateUsageMeter('abuseipdb', 150, 1000);
+                updateUsageMeter('virustotal', 75, 500);
+            }, 500);
+        });
+
+        // 使用量メーターの更新
+        function updateUsageMeter(apiName, used, limit) {
+            const usedEl = document.getElementById(`${apiName}-used`);
+            const fillEl = document.getElementById(`${apiName}-fill`);
+
+            if (!usedEl || !fillEl) return;
+
+            const percentage = (used / limit) * 100;
+            usedEl.textContent = used.toLocaleString();
+            fillEl.style.width = `${percentage}%`;
+
+            // 色の設定
+            fillEl.classList.remove('safe', 'warning', 'danger');
+            if (percentage < 50) {
+                fillEl.classList.add('safe');
+            } else if (percentage < 80) {
+                fillEl.classList.add('warning');
+            } else {
+                fillEl.classList.add('danger');
+            }
+        }
+    </script>
+</body>
+</html>
