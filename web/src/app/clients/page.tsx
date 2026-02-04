@@ -3,7 +3,8 @@
 /**
  * Clients List Page
  *
- * クライアント一覧ページ - 監視対象のクライアント端末一覧
+ * クライアント一覧ページ - 監視対象のエージェント一覧
+ * APIからAgentInfoを取得して表示
  */
 
 import React, { useState, useEffect } from 'react';
@@ -14,107 +15,52 @@ import {
   Server,
   Wifi,
   WifiOff,
-  Plus,
   Search,
-  MoreVertical,
-  Package,
   Activity,
-  Users,
   Shield,
-  Globe,
   RefreshCw,
 } from 'lucide-react';
 import Link from 'next/link';
-
-interface Client {
-  id: string;
-  name: string;
-  hostname: string;
-  ip_address: string;
-  os: string;
-  status: 'online' | 'offline' | 'warning';
-  last_seen: string;
-  packages_count: number;
-  services_count: number;
-  users_count: number;
-  alerts_count: number;
-}
-
-// Mock data - will be replaced with API calls
-const mockClients: Client[] = [
-  {
-    id: '1',
-    name: 'Production Server 1',
-    hostname: 'prod-srv-01',
-    ip_address: '192.168.1.10',
-    os: 'Ubuntu 22.04 LTS',
-    status: 'online',
-    last_seen: '2025-02-04T09:30:00Z',
-    packages_count: 342,
-    services_count: 45,
-    users_count: 8,
-    alerts_count: 2,
-  },
-  {
-    id: '2',
-    name: 'Web Server',
-    hostname: 'web-srv-01',
-    ip_address: '192.168.1.11',
-    os: 'CentOS 8',
-    status: 'online',
-    last_seen: '2025-02-04T09:29:00Z',
-    packages_count: 256,
-    services_count: 32,
-    users_count: 5,
-    alerts_count: 0,
-  },
-  {
-    id: '3',
-    name: 'Database Server',
-    hostname: 'db-srv-01',
-    ip_address: '192.168.1.12',
-    os: 'Debian 11',
-    status: 'warning',
-    last_seen: '2025-02-04T09:25:00Z',
-    packages_count: 198,
-    services_count: 28,
-    users_count: 3,
-    alerts_count: 5,
-  },
-  {
-    id: '4',
-    name: 'Mail Server',
-    hostname: 'mail-srv-01',
-    ip_address: '192.168.1.13',
-    os: 'Ubuntu 20.04 LTS',
-    status: 'offline',
-    last_seen: '2025-02-04T08:00:00Z',
-    packages_count: 178,
-    services_count: 22,
-    users_count: 4,
-    alerts_count: 12,
-  },
-];
+import { api, AgentInfo } from '@/lib/api';
 
 export default function ClientsPage() {
   const { t } = useTranslation();
-  const [clients, setClients] = useState<Client[]>(mockClients);
+  const [agents, setAgents] = useState<AgentInfo[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredClients = clients.filter(client => {
+  const fetchAgents = async () => {
+    setIsLoading(true);
+    try {
+      const data = await api.getAgents();
+      setAgents(data);
+    } catch (error) {
+      console.error('Failed to fetch agents:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAgents();
+    // 30秒ごとに更新
+    const interval = setInterval(fetchAgents, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const filteredAgents = agents.filter(agent => {
     const matchesSearch =
-      client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.hostname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.ip_address.includes(searchQuery);
+      agent.hostname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      agent.agent_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (agent.ip_address && agent.ip_address.includes(searchQuery));
 
-    const matchesStatus = statusFilter === 'all' || client.status === statusFilter;
+    const matchesStatus = statusFilter === 'all' || agent.status === statusFilter;
 
     return matchesSearch && matchesStatus;
   });
 
-  const getStatusColor = (status: Client['status']) => {
+  const getStatusColor = (status: AgentInfo['status']) => {
     switch (status) {
       case 'online':
         return 'bg-green-500';
@@ -127,7 +73,7 @@ export default function ClientsPage() {
     }
   };
 
-  const getStatusIcon = (status: Client['status']) => {
+  const getStatusIcon = (status: AgentInfo['status']) => {
     switch (status) {
       case 'online':
         return <Wifi className="w-4 h-4 text-green-500" />;
@@ -156,19 +102,11 @@ export default function ClientsPage() {
     return t('clients.daysAgo', { count: days });
   };
 
-  const handleRefresh = () => {
-    setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  };
-
   const stats = {
-    total: clients.length,
-    online: clients.filter(c => c.status === 'online').length,
-    warning: clients.filter(c => c.status === 'warning').length,
-    offline: clients.filter(c => c.status === 'offline').length,
+    total: agents.length,
+    online: agents.filter(a => a.status === 'online').length,
+    warning: agents.filter(a => a.status === 'warning').length,
+    offline: agents.filter(a => a.status === 'offline').length,
   };
 
   return (
@@ -186,16 +124,12 @@ export default function ClientsPage() {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={handleRefresh}
+              onClick={fetchAgents}
               className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               disabled={isLoading}
             >
               <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
               {t('common.refresh')}
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
-              <Plus className="w-4 h-4" />
-              {t('clients.addClient')}
             </button>
           </div>
         </div>
@@ -272,100 +206,89 @@ export default function ClientsPage() {
           </select>
         </div>
 
-        {/* Client Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredClients.map((client) => (
-            <Link
-              key={client.id}
-              href={`/clients/${client.id}`}
-              className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                    <Server className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
-                      {client.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {client.hostname}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${getStatusColor(client.status)}`} />
-                  {getStatusIcon(client.status)}
-                </div>
-              </div>
-
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
-                  <span>{t('clients.ipAddress')}</span>
-                  <span className="font-mono">{client.ip_address}</span>
-                </div>
-                <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
-                  <span>{t('clients.operatingSystem')}</span>
-                  <span>{client.os}</span>
-                </div>
-                <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
-                  <span>{t('clients.lastSeen')}</span>
-                  <span>{formatLastSeen(client.last_seen)}</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="text-center">
-                  <div className="flex items-center justify-center">
-                    <Package className="w-4 h-4 text-blue-500 mr-1" />
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {client.packages_count}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('clients.packages')}</p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center">
-                    <Activity className="w-4 h-4 text-green-500 mr-1" />
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {client.services_count}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('clients.services')}</p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center">
-                    <Users className="w-4 h-4 text-purple-500 mr-1" />
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {client.users_count}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('clients.users')}</p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center">
-                    <Shield className="w-4 h-4 text-red-500 mr-1" />
-                    <span className={`font-semibold ${client.alerts_count > 0 ? 'text-red-500' : 'text-gray-900 dark:text-white'}`}>
-                      {client.alerts_count}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('clients.alerts')}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {filteredClients.length === 0 && (
+        {/* Loading */}
+        {isLoading && agents.length === 0 ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        ) : filteredAgents.length === 0 ? (
           <div className="text-center py-12">
             <Monitor className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              {t('clients.noClientsFound')}
+              {agents.length === 0 ? t('clients.noClientsFound') : t('clients.noClientsDescription')}
             </h3>
             <p className="text-gray-500 dark:text-gray-400">
-              {t('clients.noClientsDescription')}
+              {agents.length === 0
+                ? 'エージェントがまだ接続されていません。ghost-agentをインストールして起動してください。'
+                : t('clients.noClientsDescription')}
             </p>
+          </div>
+        ) : (
+          /* Agent Cards */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredAgents.map((agent) => (
+              <Link
+                key={agent.agent_id}
+                href={`/clients/${encodeURIComponent(agent.agent_id)}`}
+                className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                      <Server className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                        {agent.hostname}
+                      </h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono">
+                        {agent.agent_id.substring(0, 16)}...
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${getStatusColor(agent.status)}`} />
+                    {getStatusIcon(agent.status)}
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-sm">
+                  {agent.ip_address && (
+                    <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
+                      <span>{t('clients.ipAddress')}</span>
+                      <span className="font-mono">{agent.ip_address}</span>
+                    </div>
+                  )}
+                  {agent.version && (
+                    <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
+                      <span>{t('clients.agentVersion')}</span>
+                      <span>{agent.version}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between text-gray-600 dark:text-gray-400">
+                    <span>{t('clients.lastSeen')}</span>
+                    <span>{formatLastSeen(agent.last_seen)}</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                      agent.status === 'online'
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300'
+                        : agent.status === 'warning'
+                        ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300'
+                        : 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300'
+                    }`}>
+                      {agent.status === 'online' ? t('clients.statusOnline') :
+                       agent.status === 'warning' ? t('clients.statusWarning') :
+                       t('clients.statusOffline')}
+                    </span>
+                    <Activity className="w-4 h-4 text-gray-400" />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         )}
       </div>

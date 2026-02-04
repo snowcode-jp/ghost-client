@@ -43,7 +43,7 @@ const navigation: NavItem[] = [
   { nameKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
   { nameKey: 'nav.clients', href: '/clients', icon: Monitor },
   { nameKey: 'nav.alerts', href: '/alerts', icon: Bell },
-  { nameKey: 'nav.detectionRules', href: '/rules', icon: Shield },
+  { nameKey: 'nav.detectionRules', href: '/detection-rules', icon: Shield },
   { nameKey: 'nav.metrics', href: '/metrics', icon: Activity },
   { nameKey: 'nav.reports', href: '/reports', icon: FileText },
 ];

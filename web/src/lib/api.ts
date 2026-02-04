@@ -277,6 +277,50 @@ export interface AlertCount {
   unacknowledged: number;
 }
 
+// レポート関連の型
+export interface Report {
+  id: string;
+  report_type: 'daily' | 'weekly' | 'monthly' | 'custom';
+  title: string;
+  generated_at: string;
+  period_start: string;
+  period_end: string;
+  metrics_summary: MetricsSummary | null;
+  alert_count: AlertCount | null;
+  recommendations: Recommendation[];
+  executive_summary: string;
+}
+
+export interface Recommendation {
+  priority: number;
+  category: string;
+  title: string;
+  description: string;
+  action_items: string[];
+  impact: 'low' | 'medium' | 'high' | 'critical';
+}
+
+// 検出ルール
+export interface DetectionRule {
+  id: string;
+  name: string;
+  description: string;
+  severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  category: string;
+  enabled: boolean;
+  conditions: string;
+  created_at: string;
+  updated_at: string;
+  triggered_count: number;
+}
+
+export interface DetectionRuleStats {
+  total: number;
+  enabled: number;
+  critical: number;
+  by_category: Record<string, number>;
+}
+
 // Create API client
 class GhostApiClient {
   private client: AxiosInstance;
@@ -643,6 +687,34 @@ class GhostApiClient {
     const response = await this.client.get<ApiResponse<ServiceWithAgent[]>>('/v1/services');
     if (!response.data.success || !response.data.data) {
       throw new Error(response.data.error || 'Failed to get services');
+    }
+    return response.data.data;
+  }
+
+  // ==================== Detection Rules ====================
+
+  async getDetectionRules(): Promise<DetectionRule[]> {
+    const response = await this.client.get<ApiResponse<DetectionRule[]>>('/v1/rules');
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get detection rules');
+    }
+    return response.data.data;
+  }
+
+  async getDetectionRuleStats(): Promise<DetectionRuleStats> {
+    const response = await this.client.get<ApiResponse<DetectionRuleStats>>('/v1/rules/stats');
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get detection rule stats');
+    }
+    return response.data.data;
+  }
+
+  // ==================== Reports ====================
+
+  async getDailyReport(): Promise<Report> {
+    const response = await this.client.get<ApiResponse<Report>>('/v1/report/daily');
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get daily report');
     }
     return response.data.data;
   }
