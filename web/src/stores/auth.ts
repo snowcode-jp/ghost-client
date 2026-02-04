@@ -8,28 +8,52 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { api, UserInfo } from '@/lib/api';
 
+// デモモード: 認証をスキップ（開発・デモ用）
+const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
+
+// デモユーザー
+const DEMO_USER: UserInfo = {
+  id: 'demo-user-001',
+  username: 'demo',
+  email: 'demo@ghost.local',
+  roles: ['admin', 'super_admin'],
+};
+
 interface AuthState {
   user: UserInfo | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  isDemoMode: boolean;
 
   // Actions
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
   clearError: () => void;
+  enableDemoMode: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
-      user: null,
-      isAuthenticated: false,
+    (set, get) => ({
+      user: DEMO_MODE ? DEMO_USER : null,
+      isAuthenticated: DEMO_MODE,
       isLoading: false,
       error: null,
+      isDemoMode: DEMO_MODE,
 
       login: async (username: string, password: string) => {
+        // デモモードの場合は即座に認証成功
+        if (get().isDemoMode) {
+          set({
+            user: DEMO_USER,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+          return;
+        }
+
         set({ isLoading: true, error: null });
         try {
           const response = await api.login({ username, password });
@@ -48,6 +72,11 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: async () => {
+        // デモモードの場合はログアウトしない
+        if (get().isDemoMode) {
+          return;
+        }
+
         try {
           await api.logout();
         } finally {
@@ -60,6 +89,12 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
+        // デモモードの場合は常に認証済み
+        if (get().isDemoMode) {
+          set({ user: DEMO_USER, isAuthenticated: true, isLoading: false });
+          return;
+        }
+
         const token = api.getAccessToken();
         if (!token) {
           set({ user: null, isAuthenticated: false });
@@ -85,12 +120,21 @@ export const useAuthStore = create<AuthState>()(
       },
 
       clearError: () => set({ error: null }),
+
+      enableDemoMode: () => set({
+        user: DEMO_USER,
+        isAuthenticated: true,
+        isDemoMode: true,
+        isLoading: false,
+        error: null,
+      }),
     }),
     {
       name: 'ghost-auth',
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
+        isDemoMode: state.isDemoMode,
       }),
     }
   )

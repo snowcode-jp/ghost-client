@@ -2,11 +2,14 @@
 
 /**
  * Sidebar Component
+ *
+ * 多言語対応・クライアント管理メニュー追加
  */
 
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
   Bell,
@@ -19,34 +22,43 @@ import {
   Activity,
   Lock,
   LogOut,
+  Monitor,
+  Package,
+  Server,
+  Terminal,
+  Globe,
+  Mail,
 } from 'lucide-react';
 import { useAuthStore } from '@/stores/auth';
+import { LanguageSelector } from '@/components/ui/LanguageSelector';
 
 interface NavItem {
-  name: string;
+  nameKey: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   adminOnly?: boolean;
 }
 
 const navigation: NavItem[] = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Alerts', href: '/alerts', icon: Bell },
-  { name: 'Detection Rules', href: '/rules', icon: Shield },
-  { name: 'Metrics', href: '/metrics', icon: Activity },
-  { name: 'Reports', href: '/reports', icon: FileText },
+  { nameKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { nameKey: 'nav.clients', href: '/clients', icon: Monitor },
+  { nameKey: 'nav.alerts', href: '/alerts', icon: Bell },
+  { nameKey: 'nav.detectionRules', href: '/rules', icon: Shield },
+  { nameKey: 'nav.metrics', href: '/metrics', icon: Activity },
+  { nameKey: 'nav.reports', href: '/reports', icon: FileText },
 ];
 
 const adminNavigation: NavItem[] = [
-  { name: 'Users', href: '/settings/users', icon: Users, adminOnly: true },
-  { name: 'API Keys', href: '/settings/apikeys', icon: Key, adminOnly: true },
-  { name: 'System', href: '/settings/system', icon: Settings, adminOnly: true },
-  { name: 'Notifications', href: '/settings/notifications', icon: Bell, adminOnly: true },
-  { name: 'Storage', href: '/settings/storage', icon: Database, adminOnly: true },
-  { name: 'Security', href: '/settings/security', icon: Lock, adminOnly: true },
+  { nameKey: 'nav.users', href: '/settings/users', icon: Users, adminOnly: true },
+  { nameKey: 'nav.apiKeys', href: '/settings/apikeys', icon: Key, adminOnly: true },
+  { nameKey: 'nav.system', href: '/settings/system', icon: Settings, adminOnly: true },
+  { nameKey: 'nav.notifications', href: '/settings/notifications', icon: Bell, adminOnly: true },
+  { nameKey: 'nav.storage', href: '/settings/storage', icon: Database, adminOnly: true },
+  { nameKey: 'nav.security', href: '/settings/security', icon: Lock, adminOnly: true },
 ];
 
 export const Sidebar: React.FC = () => {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const { user, logout } = useAuthStore();
 
@@ -73,7 +85,7 @@ export const Sidebar: React.FC = () => {
         `}
       >
         <Icon className="w-5 h-5" />
-        {item.name}
+        {t(item.nameKey)}
       </Link>
     );
   };
@@ -89,6 +101,11 @@ export const Sidebar: React.FC = () => {
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Security Monitor</p>
       </div>
 
+      {/* Language Selector */}
+      <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+        <LanguageSelector />
+      </div>
+
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto p-4">
         <div className="space-y-1">
@@ -101,7 +118,7 @@ export const Sidebar: React.FC = () => {
           <>
             <div className="mt-6 mb-2">
               <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Administration
+                {t('nav.administration')}
               </h3>
             </div>
             <div className="space-y-1">
@@ -133,7 +150,7 @@ export const Sidebar: React.FC = () => {
           className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors"
         >
           <LogOut className="w-4 h-4" />
-          Logout
+          {t('nav.logout')}
         </button>
       </div>
     </aside>

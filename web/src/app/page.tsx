@@ -2,27 +2,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { api } from '@/lib/api';
 
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const checkSetup = async () => {
-      try {
-        const status = await api.getSetupStatus();
-        if (status.needs_setup) {
-          router.replace('/setup');
-        } else {
-          router.replace('/dashboard');
-        }
-      } catch (error) {
-        console.error('Setup check failed:', error);
-        router.replace('/login');
-      }
-    };
-
-    checkSetup();
+    // ログインページへリダイレクト（セットアップが必要な場合はログインページから/setupへ）
+    router.replace('/login');
   }, [router]);
 
   return (

@@ -1,0 +1,1310 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Ghost Client Message Codes - Multilingual",
+    "lastUpdated": "2025-02-02",
+    "supportedLanguages": ["en", "ja", "zh", "ko", "de", "pt"]
+  },
+
+  "E20A0001": {
+    "en": {
+      "title": "Client Initialization Failed",
+      "message": "The Ghost client failed to initialize.",
+      "action": "Refresh the page or check browser console.",
+      "severity": "critical"
+    },
+    "ja": {
+      "title": "クライアント初期化エラー",
+      "message": "Ghostクライアントの初期化に失敗しました。",
+      "action": "ページを更新するか、ブラウザコンソールを確認してください。",
+      "severity": "critical"
+    },
+    "zh": {
+      "title": "客户端初始化失败",
+      "message": "Ghost客户端初始化失败。",
+      "action": "刷新页面或检查浏览器控制台。",
+      "severity": "critical"
+    },
+    "ko": {
+      "title": "클라이언트 초기화 실패",
+      "message": "Ghost 클라이언트 초기화에 실패했습니다.",
+      "action": "페이지를 새로고침하거나 브라우저 콘솔을 확인하세요.",
+      "severity": "critical"
+    },
+    "de": {
+      "title": "Client-Initialisierung fehlgeschlagen",
+      "message": "Der Ghost-Client konnte nicht initialisiert werden.",
+      "action": "Aktualisieren Sie die Seite oder überprüfen Sie die Browser-Konsole.",
+      "severity": "critical"
+    },
+    "pt": {
+      "title": "Falha na Inicialização do Cliente",
+      "message": "O cliente Ghost falhou ao inicializar.",
+      "action": "Atualize a página ou verifique o console do navegador.",
+      "severity": "critical"
+    }
+  },
+  "E20A0002": {
+    "en": {
+      "title": "API Connection Failed",
+      "message": "Failed to connect to the Ghost API server.",
+      "action": "Check your network connection and server status.",
+      "severity": "critical"
+    },
+    "ja": {
+      "title": "API接続エラー",
+      "message": "Ghost APIサーバーへの接続に失敗しました。",
+      "action": "ネットワーク接続とサーバーの状態を確認してください。",
+      "severity": "critical"
+    },
+    "zh": {
+      "title": "API连接失败",
+      "message": "无法连接到Ghost API服务器。",
+      "action": "检查您的网络连接和服务器状态。",
+      "severity": "critical"
+    },
+    "ko": {
+      "title": "API 연결 실패",
+      "message": "Ghost API 서버에 연결하지 못했습니다.",
+      "action": "네트워크 연결 및 서버 상태를 확인하세요.",
+      "severity": "critical"
+    },
+    "de": {
+      "title": "API-Verbindung fehlgeschlagen",
+      "message": "Verbindung zum Ghost API-Server fehlgeschlagen.",
+      "action": "Überprüfen Sie Ihre Netzwerkverbindung und den Serverstatus.",
+      "severity": "critical"
+    },
+    "pt": {
+      "title": "Falha na Conexão com API",
+      "message": "Falha ao conectar ao servidor API do Ghost.",
+      "action": "Verifique sua conexão de rede e o status do servidor.",
+      "severity": "critical"
+    }
+  },
+  "E20A0003": {
+    "en": {
+      "title": "API Request Failed",
+      "message": "The API request failed.",
+      "action": "Try again later or contact support.",
+      "severity": "high"
+    },
+    "ja": {
+      "title": "APIリクエスト失敗",
+      "message": "APIリクエストに失敗しました。",
+      "action": "後でもう一度試すか、サポートに連絡してください。",
+      "severity": "high"
+    },
+    "zh": {
+      "title": "API请求失败",
+      "message": "API请求失败。",
+      "action": "请稍后重试或联系支持。",
+      "severity": "high"
+    },
+    "ko": {
+      "title": "API 요청 실패",
+      "message": "API 요청에 실패했습니다.",
+      "action": "나중에 다시 시도하거나 지원팀에 문의하세요.",
+      "severity": "high"
+    },
+    "de": {
+      "title": "API-Anfrage fehlgeschlagen",
+      "message": "Die API-Anfrage ist fehlgeschlagen.",
+      "action": "Versuchen Sie es später erneut oder kontaktieren Sie den Support.",
+      "severity": "high"
+    },
+    "pt": {
+      "title": "Falha na Requisição da API",
+      "message": "A requisição da API falhou.",
+      "action": "Tente novamente mais tarde ou entre em contato com o suporte.",
+      "severity": "high"
+    }
+  },
+  "E20A0004": {
+    "en": {
+      "title": "API Timeout",
+      "message": "The API request timed out.",
+      "action": "Check your network connection and try again.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "APIタイムアウト",
+      "message": "APIリクエストがタイムアウトしました。",
+      "action": "ネットワーク接続を確認して再試行してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "API超时",
+      "message": "API请求超时。",
+      "action": "检查您的网络连接并重试。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "API 시간 초과",
+      "message": "API 요청 시간이 초과되었습니다.",
+      "action": "네트워크 연결을 확인하고 다시 시도하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "API-Zeitüberschreitung",
+      "message": "Die API-Anfrage hat das Zeitlimit überschritten.",
+      "action": "Überprüfen Sie Ihre Netzwerkverbindung und versuchen Sie es erneut.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Tempo Limite da API",
+      "message": "A requisição da API excedeu o tempo limite.",
+      "action": "Verifique sua conexão de rede e tente novamente.",
+      "severity": "medium"
+    }
+  },
+
+  "E20B0001": {
+    "en": {
+      "title": "Component Load Error",
+      "message": "Failed to load UI component.",
+      "action": "Refresh the page.",
+      "severity": "high"
+    },
+    "ja": {
+      "title": "コンポーネント読み込みエラー",
+      "message": "UIコンポーネントの読み込みに失敗しました。",
+      "action": "ページを更新してください。",
+      "severity": "high"
+    },
+    "zh": {
+      "title": "组件加载错误",
+      "message": "UI组件加载失败。",
+      "action": "刷新页面。",
+      "severity": "high"
+    },
+    "ko": {
+      "title": "컴포넌트 로드 오류",
+      "message": "UI 컴포넌트 로드에 실패했습니다.",
+      "action": "페이지를 새로고침하세요.",
+      "severity": "high"
+    },
+    "de": {
+      "title": "Komponenten-Ladefehler",
+      "message": "UI-Komponente konnte nicht geladen werden.",
+      "action": "Aktualisieren Sie die Seite.",
+      "severity": "high"
+    },
+    "pt": {
+      "title": "Erro ao Carregar Componente",
+      "message": "Falha ao carregar o componente de UI.",
+      "action": "Atualize a página.",
+      "severity": "high"
+    }
+  },
+  "E20B0002": {
+    "en": {
+      "title": "Render Error",
+      "message": "Failed to render the page.",
+      "action": "Refresh the page or clear browser cache.",
+      "severity": "high"
+    },
+    "ja": {
+      "title": "レンダリングエラー",
+      "message": "ページのレンダリングに失敗しました。",
+      "action": "ページを更新するか、ブラウザキャッシュをクリアしてください。",
+      "severity": "high"
+    },
+    "zh": {
+      "title": "渲染错误",
+      "message": "页面渲染失败。",
+      "action": "刷新页面或清除浏览器缓存。",
+      "severity": "high"
+    },
+    "ko": {
+      "title": "렌더링 오류",
+      "message": "페이지 렌더링에 실패했습니다.",
+      "action": "페이지를 새로고침하거나 브라우저 캐시를 지우세요.",
+      "severity": "high"
+    },
+    "de": {
+      "title": "Rendering-Fehler",
+      "message": "Die Seite konnte nicht gerendert werden.",
+      "action": "Aktualisieren Sie die Seite oder leeren Sie den Browser-Cache.",
+      "severity": "high"
+    },
+    "pt": {
+      "title": "Erro de Renderização",
+      "message": "Falha ao renderizar a página.",
+      "action": "Atualize a página ou limpe o cache do navegador.",
+      "severity": "high"
+    }
+  },
+
+  "E20C0001": {
+    "en": {
+      "title": "Form Validation Error",
+      "message": "Please correct the errors in the form.",
+      "action": "Review the highlighted fields.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "フォーム検証エラー",
+      "message": "フォームのエラーを修正してください。",
+      "action": "ハイライトされたフィールドを確認してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "表单验证错误",
+      "message": "请更正表单中的错误。",
+      "action": "查看高亮显示的字段。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "양식 유효성 검사 오류",
+      "message": "양식의 오류를 수정해 주세요.",
+      "action": "강조 표시된 필드를 확인하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Formular-Validierungsfehler",
+      "message": "Bitte korrigieren Sie die Fehler im Formular.",
+      "action": "Überprüfen Sie die markierten Felder.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Erro de Validação do Formulário",
+      "message": "Por favor, corrija os erros no formulário.",
+      "action": "Revise os campos destacados.",
+      "severity": "medium"
+    }
+  },
+  "E20C0002": {
+    "en": {
+      "title": "Required Field Missing",
+      "message": "Please fill in all required fields.",
+      "action": "Complete the required fields marked with *.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "必須フィールドが未入力",
+      "message": "すべての必須フィールドを入力してください。",
+      "action": "*マークのある必須フィールドを入力してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "缺少必填字段",
+      "message": "请填写所有必填字段。",
+      "action": "完成带*标记的必填字段。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "필수 필드 누락",
+      "message": "모든 필수 필드를 입력해 주세요.",
+      "action": "* 표시가 있는 필수 필드를 입력하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Pflichtfeld fehlt",
+      "message": "Bitte füllen Sie alle Pflichtfelder aus.",
+      "action": "Vervollständigen Sie die mit * markierten Pflichtfelder.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Campo Obrigatório Ausente",
+      "message": "Por favor, preencha todos os campos obrigatórios.",
+      "action": "Complete os campos obrigatórios marcados com *.",
+      "severity": "medium"
+    }
+  },
+  "E20C0003": {
+    "en": {
+      "title": "Invalid Email Format",
+      "message": "Please enter a valid email address.",
+      "action": "Use format: example@domain.com",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "メールアドレス形式エラー",
+      "message": "有効なメールアドレスを入力してください。",
+      "action": "形式: example@domain.com",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "邮箱格式无效",
+      "message": "请输入有效的电子邮件地址。",
+      "action": "格式: example@domain.com",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "이메일 형식 오류",
+      "message": "유효한 이메일 주소를 입력해 주세요.",
+      "action": "형식: example@domain.com",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Ungültiges E-Mail-Format",
+      "message": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "action": "Format: example@domain.com",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Formato de Email Inválido",
+      "message": "Por favor, insira um endereço de email válido.",
+      "action": "Formato: example@domain.com",
+      "severity": "medium"
+    }
+  },
+  "E20C0004": {
+    "en": {
+      "title": "Password Too Weak",
+      "message": "Password does not meet security requirements.",
+      "action": "Use at least 8 characters with uppercase, lowercase, number, and symbol.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "パスワードが弱い",
+      "message": "パスワードがセキュリティ要件を満たしていません。",
+      "action": "大文字、小文字、数字、記号を含む8文字以上を使用してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "密码强度不足",
+      "message": "密码不符合安全要求。",
+      "action": "请使用至少8个字符，包含大写、小写字母、数字和符号。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "비밀번호가 취약함",
+      "message": "비밀번호가 보안 요구 사항을 충족하지 않습니다.",
+      "action": "대문자, 소문자, 숫자, 기호를 포함한 8자 이상을 사용하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Passwort zu schwach",
+      "message": "Das Passwort erfüllt nicht die Sicherheitsanforderungen.",
+      "action": "Verwenden Sie mindestens 8 Zeichen mit Groß-, Kleinbuchstaben, Zahlen und Symbolen.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Senha Muito Fraca",
+      "message": "A senha não atende aos requisitos de segurança.",
+      "action": "Use pelo menos 8 caracteres com maiúsculas, minúsculas, números e símbolos.",
+      "severity": "medium"
+    }
+  },
+  "E20C0005": {
+    "en": {
+      "title": "Passwords Don't Match",
+      "message": "The passwords you entered don't match.",
+      "action": "Please re-enter your passwords.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "パスワードが一致しません",
+      "message": "入力されたパスワードが一致しません。",
+      "action": "パスワードを再入力してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "密码不匹配",
+      "message": "您输入的密码不匹配。",
+      "action": "请重新输入密码。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "비밀번호 불일치",
+      "message": "입력한 비밀번호가 일치하지 않습니다.",
+      "action": "비밀번호를 다시 입력해 주세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Passwörter stimmen nicht überein",
+      "message": "Die eingegebenen Passwörter stimmen nicht überein.",
+      "action": "Bitte geben Sie Ihre Passwörter erneut ein.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Senhas Não Coincidem",
+      "message": "As senhas que você digitou não coincidem.",
+      "action": "Por favor, digite suas senhas novamente.",
+      "severity": "medium"
+    }
+  },
+
+  "E20D0001": {
+    "en": {
+      "title": "Chart Load Error",
+      "message": "Failed to load chart data.",
+      "action": "Try refreshing the page.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "チャート読み込みエラー",
+      "message": "チャートデータの読み込みに失敗しました。",
+      "action": "ページを更新してみてください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "图表加载错误",
+      "message": "图表数据加载失败。",
+      "action": "尝试刷新页面。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "차트 로드 오류",
+      "message": "차트 데이터 로드에 실패했습니다.",
+      "action": "페이지를 새로고침해 보세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Diagramm-Ladefehler",
+      "message": "Diagrammdaten konnten nicht geladen werden.",
+      "action": "Versuchen Sie, die Seite zu aktualisieren.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Erro ao Carregar Gráfico",
+      "message": "Falha ao carregar dados do gráfico.",
+      "action": "Tente atualizar a página.",
+      "severity": "medium"
+    }
+  },
+  "E20D0002": {
+    "en": {
+      "title": "No Data Available",
+      "message": "No data available for the selected period.",
+      "action": "Try selecting a different time range.",
+      "severity": "low"
+    },
+    "ja": {
+      "title": "データがありません",
+      "message": "選択した期間のデータがありません。",
+      "action": "別の期間を選択してみてください。",
+      "severity": "low"
+    },
+    "zh": {
+      "title": "无可用数据",
+      "message": "所选期间没有可用数据。",
+      "action": "尝试选择不同的时间范围。",
+      "severity": "low"
+    },
+    "ko": {
+      "title": "데이터 없음",
+      "message": "선택한 기간에 사용 가능한 데이터가 없습니다.",
+      "action": "다른 시간 범위를 선택해 보세요.",
+      "severity": "low"
+    },
+    "de": {
+      "title": "Keine Daten verfügbar",
+      "message": "Keine Daten für den ausgewählten Zeitraum verfügbar.",
+      "action": "Versuchen Sie, einen anderen Zeitraum auszuwählen.",
+      "severity": "low"
+    },
+    "pt": {
+      "title": "Sem Dados Disponíveis",
+      "message": "Não há dados disponíveis para o período selecionado.",
+      "action": "Tente selecionar um intervalo de tempo diferente.",
+      "severity": "low"
+    }
+  },
+
+  "E20E0001": {
+    "en": {
+      "title": "Language Load Error",
+      "message": "Failed to load language resources.",
+      "action": "Refresh the page or use default language.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "言語読み込みエラー",
+      "message": "言語リソースの読み込みに失敗しました。",
+      "action": "ページを更新するか、デフォルト言語を使用してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "语言加载错误",
+      "message": "语言资源加载失败。",
+      "action": "刷新页面或使用默认语言。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "언어 로드 오류",
+      "message": "언어 리소스를 로드하지 못했습니다.",
+      "action": "페이지를 새로고침하거나 기본 언어를 사용하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Sprach-Ladefehler",
+      "message": "Sprachressourcen konnten nicht geladen werden.",
+      "action": "Aktualisieren Sie die Seite oder verwenden Sie die Standardsprache.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Erro ao Carregar Idioma",
+      "message": "Falha ao carregar recursos de idioma.",
+      "action": "Atualize a página ou use o idioma padrão.",
+      "severity": "medium"
+    }
+  },
+
+  "E21A0001": {
+    "en": {
+      "title": "CLI Initialization Failed",
+      "message": "Failed to initialize the CLI tool.",
+      "action": "Check installation and dependencies.",
+      "severity": "critical"
+    },
+    "ja": {
+      "title": "CLI初期化エラー",
+      "message": "CLIツールの初期化に失敗しました。",
+      "action": "インストールと依存関係を確認してください。",
+      "severity": "critical"
+    },
+    "zh": {
+      "title": "CLI初始化失败",
+      "message": "CLI工具初始化失败。",
+      "action": "检查安装和依赖项。",
+      "severity": "critical"
+    },
+    "ko": {
+      "title": "CLI 초기화 실패",
+      "message": "CLI 도구 초기화에 실패했습니다.",
+      "action": "설치 및 종속성을 확인하세요.",
+      "severity": "critical"
+    },
+    "de": {
+      "title": "CLI-Initialisierung fehlgeschlagen",
+      "message": "Das CLI-Tool konnte nicht initialisiert werden.",
+      "action": "Überprüfen Sie Installation und Abhängigkeiten.",
+      "severity": "critical"
+    },
+    "pt": {
+      "title": "Falha na Inicialização do CLI",
+      "message": "Falha ao inicializar a ferramenta CLI.",
+      "action": "Verifique a instalação e dependências.",
+      "severity": "critical"
+    }
+  },
+  "E21B0001": {
+    "en": {
+      "title": "Command Not Found",
+      "message": "The specified command was not found.",
+      "action": "Run 'ghost --help' for available commands.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "コマンドが見つかりません",
+      "message": "指定されたコマンドが見つかりませんでした。",
+      "action": "利用可能なコマンドは 'ghost --help' で確認できます。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "命令未找到",
+      "message": "未找到指定的命令。",
+      "action": "运行 'ghost --help' 查看可用命令。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "명령을 찾을 수 없음",
+      "message": "지정된 명령을 찾을 수 없습니다.",
+      "action": "'ghost --help'를 실행하여 사용 가능한 명령을 확인하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Befehl nicht gefunden",
+      "message": "Der angegebene Befehl wurde nicht gefunden.",
+      "action": "Führen Sie 'ghost --help' für verfügbare Befehle aus.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Comando Não Encontrado",
+      "message": "O comando especificado não foi encontrado.",
+      "action": "Execute 'ghost --help' para ver os comandos disponíveis.",
+      "severity": "medium"
+    }
+  },
+  "E21B0002": {
+    "en": {
+      "title": "Invalid Arguments",
+      "message": "Invalid command arguments provided.",
+      "action": "Check command usage with --help flag.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "無効な引数",
+      "message": "無効なコマンド引数が指定されました。",
+      "action": "--help フラグでコマンドの使用方法を確認してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "无效参数",
+      "message": "提供了无效的命令参数。",
+      "action": "使用 --help 标志检查命令用法。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "잘못된 인수",
+      "message": "잘못된 명령 인수가 제공되었습니다.",
+      "action": "--help 플래그로 명령 사용법을 확인하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Ungültige Argumente",
+      "message": "Ungültige Befehlsargumente angegeben.",
+      "action": "Überprüfen Sie die Befehlsverwendung mit dem --help-Flag.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Argumentos Inválidos",
+      "message": "Argumentos de comando inválidos fornecidos.",
+      "action": "Verifique o uso do comando com a flag --help.",
+      "severity": "medium"
+    }
+  },
+
+  "W20A0001": {
+    "en": {
+      "title": "Session Expiring",
+      "message": "Your session will expire in 5 minutes.",
+      "action": "Save your work and refresh the page to extend.",
+      "severity": "low"
+    },
+    "ja": {
+      "title": "セッション期限切れ間近",
+      "message": "セッションは5分後に期限切れになります。",
+      "action": "作業を保存し、ページを更新して延長してください。",
+      "severity": "low"
+    },
+    "zh": {
+      "title": "会话即将过期",
+      "message": "您的会话将在5分钟后过期。",
+      "action": "保存您的工作并刷新页面以延长会话。",
+      "severity": "low"
+    },
+    "ko": {
+      "title": "세션 만료 임박",
+      "message": "세션이 5분 후에 만료됩니다.",
+      "action": "작업을 저장하고 페이지를 새로고침하여 연장하세요.",
+      "severity": "low"
+    },
+    "de": {
+      "title": "Sitzung läuft ab",
+      "message": "Ihre Sitzung läuft in 5 Minuten ab.",
+      "action": "Speichern Sie Ihre Arbeit und aktualisieren Sie die Seite, um zu verlängern.",
+      "severity": "low"
+    },
+    "pt": {
+      "title": "Sessão Expirando",
+      "message": "Sua sessão expirará em 5 minutos.",
+      "action": "Salve seu trabalho e atualize a página para estender.",
+      "severity": "low"
+    }
+  },
+  "W20A0002": {
+    "en": {
+      "title": "Unsaved Changes",
+      "message": "You have unsaved changes.",
+      "action": "Save your changes before leaving the page.",
+      "severity": "medium"
+    },
+    "ja": {
+      "title": "未保存の変更",
+      "message": "保存されていない変更があります。",
+      "action": "ページを離れる前に変更を保存してください。",
+      "severity": "medium"
+    },
+    "zh": {
+      "title": "未保存的更改",
+      "message": "您有未保存的更改。",
+      "action": "离开页面前请保存更改。",
+      "severity": "medium"
+    },
+    "ko": {
+      "title": "저장되지 않은 변경사항",
+      "message": "저장되지 않은 변경사항이 있습니다.",
+      "action": "페이지를 떠나기 전에 변경사항을 저장하세요.",
+      "severity": "medium"
+    },
+    "de": {
+      "title": "Ungespeicherte Änderungen",
+      "message": "Sie haben ungespeicherte Änderungen.",
+      "action": "Speichern Sie Ihre Änderungen, bevor Sie die Seite verlassen.",
+      "severity": "medium"
+    },
+    "pt": {
+      "title": "Alterações Não Salvas",
+      "message": "Você tem alterações não salvas.",
+      "action": "Salve suas alterações antes de sair da página.",
+      "severity": "medium"
+    }
+  },
+  "W20B0001": {
+    "en": {
+      "title": "Browser Not Supported",
+      "message": "Your browser may not be fully supported.",
+      "action": "For best experience, use Chrome, Firefox, or Edge.",
+      "severity": "low"
+    },
+    "ja": {
+      "title": "ブラウザ非対応",
+      "message": "お使いのブラウザは完全にはサポートされていない可能性があります。",
+      "action": "最適な体験のため、Chrome、Firefox、Edgeをご使用ください。",
+      "severity": "low"
+    },
+    "zh": {
+      "title": "浏览器不支持",
+      "message": "您的浏览器可能不完全受支持。",
+      "action": "为获得最佳体验，请使用Chrome、Firefox或Edge。",
+      "severity": "low"
+    },
+    "ko": {
+      "title": "브라우저 미지원",
+      "message": "귀하의 브라우저는 완전히 지원되지 않을 수 있습니다.",
+      "action": "최상의 경험을 위해 Chrome, Firefox 또는 Edge를 사용하세요.",
+      "severity": "low"
+    },
+    "de": {
+      "title": "Browser nicht unterstützt",
+      "message": "Ihr Browser wird möglicherweise nicht vollständig unterstützt.",
+      "action": "Für die beste Erfahrung verwenden Sie Chrome, Firefox oder Edge.",
+      "severity": "low"
+    },
+    "pt": {
+      "title": "Navegador Não Suportado",
+      "message": "Seu navegador pode não ser totalmente suportado.",
+      "action": "Para melhor experiência, use Chrome, Firefox ou Edge.",
+      "severity": "low"
+    }
+  },
+  "W20B0002": {
+    "en": {
+      "title": "JavaScript Disabled",
+      "message": "JavaScript is required for this application.",
+      "action": "Please enable JavaScript in your browser settings.",
+      "severity": "critical"
+    },
+    "ja": {
+      "title": "JavaScript無効",
+      "message": "このアプリケーションにはJavaScriptが必要です。",
+      "action": "ブラウザ設定でJavaScriptを有効にしてください。",
+      "severity": "critical"
+    },
+    "zh": {
+      "title": "JavaScript已禁用",
+      "message": "此应用程序需要JavaScript。",
+      "action": "请在浏览器设置中启用JavaScript。",
+      "severity": "critical"
+    },
+    "ko": {
+      "title": "JavaScript 비활성화됨",
+      "message": "이 애플리케이션에는 JavaScript가 필요합니다.",
+      "action": "브라우저 설정에서 JavaScript를 활성화하세요.",
+      "severity": "critical"
+    },
+    "de": {
+      "title": "JavaScript deaktiviert",
+      "message": "JavaScript ist für diese Anwendung erforderlich.",
+      "action": "Bitte aktivieren Sie JavaScript in Ihren Browser-Einstellungen.",
+      "severity": "critical"
+    },
+    "pt": {
+      "title": "JavaScript Desativado",
+      "message": "JavaScript é necessário para esta aplicação.",
+      "action": "Por favor, ative o JavaScript nas configurações do navegador.",
+      "severity": "critical"
+    }
+  },
+
+  "I20A0001": {
+    "en": {
+      "title": "Loading",
+      "message": "Loading data...",
+      "action": null,
+      "severity": "info"
+    },
+    "ja": {
+      "title": "読み込み中",
+      "message": "データを読み込んでいます...",
+      "action": null,
+      "severity": "info"
+    },
+    "zh": {
+      "title": "加载中",
+      "message": "正在加载数据...",
+      "action": null,
+      "severity": "info"
+    },
+    "ko": {
+      "title": "로딩 중",
+      "message": "데이터를 로드하는 중...",
+      "action": null,
+      "severity": "info"
+    },
+    "de": {
+      "title": "Laden",
+      "message": "Daten werden geladen...",
+      "action": null,
+      "severity": "info"
+    },
+    "pt": {
+      "title": "Carregando",
+      "message": "Carregando dados...",
+      "action": null,
+      "severity": "info"
+    }
+  },
+  "I20A0002": {
+    "en": {
+      "title": "Refreshing",
+      "message": "Refreshing data...",
+      "action": null,
+      "severity": "info"
+    },
+    "ja": {
+      "title": "更新中",
+      "message": "データを更新しています...",
+      "action": null,
+      "severity": "info"
+    },
+    "zh": {
+      "title": "刷新中",
+      "message": "正在刷新数据...",
+      "action": null,
+      "severity": "info"
+    },
+    "ko": {
+      "title": "새로고침 중",
+      "message": "데이터를 새로고침하는 중...",
+      "action": null,
+      "severity": "info"
+    },
+    "de": {
+      "title": "Aktualisieren",
+      "message": "Daten werden aktualisiert...",
+      "action": null,
+      "severity": "info"
+    },
+    "pt": {
+      "title": "Atualizando",
+      "message": "Atualizando dados...",
+      "action": null,
+      "severity": "info"
+    }
+  },
+  "I20A0003": {
+    "en": {
+      "title": "Processing",
+      "message": "Processing your request...",
+      "action": null,
+      "severity": "info"
+    },
+    "ja": {
+      "title": "処理中",
+      "message": "リクエストを処理しています...",
+      "action": null,
+      "severity": "info"
+    },
+    "zh": {
+      "title": "处理中",
+      "message": "正在处理您的请求...",
+      "action": null,
+      "severity": "info"
+    },
+    "ko": {
+      "title": "처리 중",
+      "message": "요청을 처리하는 중...",
+      "action": null,
+      "severity": "info"
+    },
+    "de": {
+      "title": "Verarbeitung",
+      "message": "Ihre Anfrage wird verarbeitet...",
+      "action": null,
+      "severity": "info"
+    },
+    "pt": {
+      "title": "Processando",
+      "message": "Processando sua solicitação...",
+      "action": null,
+      "severity": "info"
+    }
+  },
+  "I20A0004": {
+    "en": {
+      "title": "Auto-Refresh Active",
+      "message": "Data will refresh automatically.",
+      "action": null,
+      "severity": "info"
+    },
+    "ja": {
+      "title": "自動更新有効",
+      "message": "データは自動的に更新されます。",
+      "action": null,
+      "severity": "info"
+    },
+    "zh": {
+      "title": "自动刷新已启用",
+      "message": "数据将自动刷新。",
+      "action": null,
+      "severity": "info"
+    },
+    "ko": {
+      "title": "자동 새로고침 활성화",
+      "message": "데이터가 자동으로 새로고침됩니다.",
+      "action": null,
+      "severity": "info"
+    },
+    "de": {
+      "title": "Auto-Aktualisierung aktiv",
+      "message": "Daten werden automatisch aktualisiert.",
+      "action": null,
+      "severity": "info"
+    },
+    "pt": {
+      "title": "Atualização Automática Ativa",
+      "message": "Os dados serão atualizados automaticamente.",
+      "action": null,
+      "severity": "info"
+    }
+  },
+
+  "S20A0001": {
+    "en": {
+      "title": "Settings Saved",
+      "message": "Your settings have been saved.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "設定を保存しました",
+      "message": "設定が保存されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "设置已保存",
+      "message": "您的设置已保存。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "설정 저장됨",
+      "message": "설정이 저장되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Einstellungen gespeichert",
+      "message": "Ihre Einstellungen wurden gespeichert.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Configurações Salvas",
+      "message": "Suas configurações foram salvas.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20A0002": {
+    "en": {
+      "title": "Profile Updated",
+      "message": "Your profile has been updated.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "プロフィール更新",
+      "message": "プロフィールが更新されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "个人资料已更新",
+      "message": "您的个人资料已更新。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "프로필 업데이트됨",
+      "message": "프로필이 업데이트되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Profil aktualisiert",
+      "message": "Ihr Profil wurde aktualisiert.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Perfil Atualizado",
+      "message": "Seu perfil foi atualizado.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20A0003": {
+    "en": {
+      "title": "Password Changed",
+      "message": "Your password has been changed successfully.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "パスワード変更完了",
+      "message": "パスワードが正常に変更されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "密码已更改",
+      "message": "您的密码已成功更改。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "비밀번호 변경됨",
+      "message": "비밀번호가 성공적으로 변경되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Passwort geändert",
+      "message": "Ihr Passwort wurde erfolgreich geändert.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Senha Alterada",
+      "message": "Sua senha foi alterada com sucesso.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20B0001": {
+    "en": {
+      "title": "Alert Acknowledged",
+      "message": "Alert has been acknowledged.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "アラート確認済み",
+      "message": "アラートが確認されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "警报已确认",
+      "message": "警报已确认。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "알림 확인됨",
+      "message": "알림이 확인되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Warnung bestätigt",
+      "message": "Warnung wurde bestätigt.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Alerta Confirmado",
+      "message": "O alerta foi confirmado.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20B0002": {
+    "en": {
+      "title": "Alert Resolved",
+      "message": "Alert has been resolved.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "アラート解決",
+      "message": "アラートが解決されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "警报已解决",
+      "message": "警报已解决。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "알림 해결됨",
+      "message": "알림이 해결되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Warnung behoben",
+      "message": "Warnung wurde behoben.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Alerta Resolvido",
+      "message": "O alerta foi resolvido.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20B0003": {
+    "en": {
+      "title": "Rule Created",
+      "message": "Detection rule created successfully.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "ルール作成完了",
+      "message": "検出ルールが正常に作成されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "规则已创建",
+      "message": "检测规则创建成功。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "규칙 생성됨",
+      "message": "탐지 규칙이 성공적으로 생성되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Regel erstellt",
+      "message": "Erkennungsregel erfolgreich erstellt.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Regra Criada",
+      "message": "Regra de detecção criada com sucesso.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20B0004": {
+    "en": {
+      "title": "Report Generated",
+      "message": "Report has been generated successfully.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "レポート生成完了",
+      "message": "レポートが正常に生成されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "报告已生成",
+      "message": "报告生成成功。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "보고서 생성됨",
+      "message": "보고서가 성공적으로 생성되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Bericht erstellt",
+      "message": "Bericht wurde erfolgreich erstellt.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Relatório Gerado",
+      "message": "O relatório foi gerado com sucesso.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+  "S20B0005": {
+    "en": {
+      "title": "Export Complete",
+      "message": "Data export completed successfully.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "エクスポート完了",
+      "message": "データのエクスポートが正常に完了しました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "导出完成",
+      "message": "数据导出成功。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "내보내기 완료",
+      "message": "데이터 내보내기가 성공적으로 완료되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Export abgeschlossen",
+      "message": "Datenexport erfolgreich abgeschlossen.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Exportação Concluída",
+      "message": "A exportação de dados foi concluída com sucesso.",
+      "action": null,
+      "severity": "success"
+    }
+  },
+
+  "S21A0001": {
+    "en": {
+      "title": "Command Executed",
+      "message": "Command executed successfully.",
+      "action": null,
+      "severity": "success"
+    },
+    "ja": {
+      "title": "コマンド実行完了",
+      "message": "コマンドが正常に実行されました。",
+      "action": null,
+      "severity": "success"
+    },
+    "zh": {
+      "title": "命令已执行",
+      "message": "命令执行成功。",
+      "action": null,
+      "severity": "success"
+    },
+    "ko": {
+      "title": "명령 실행됨",
+      "message": "명령이 성공적으로 실행되었습니다.",
+      "action": null,
+      "severity": "success"
+    },
+    "de": {
+      "title": "Befehl ausgeführt",
+      "message": "Befehl erfolgreich ausgeführt.",
+      "action": null,
+      "severity": "success"
+    },
+    "pt": {
+      "title": "Comando Executado",
+      "message": "Comando executado com sucesso.",
+      "action": null,
+      "severity": "success"
+    }
+  }
+}

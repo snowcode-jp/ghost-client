@@ -15,7 +15,7 @@ import { api } from '@/lib/api';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated, isLoading: authLoading, error, clearError } = useAuthStore();
+  const { login, isAuthenticated, isLoading: authLoading, error, clearError, enableDemoMode } = useAuthStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [checkingSetup, setCheckingSetup] = useState(true);
 
@@ -34,6 +34,7 @@ export default function LoginPage() {
         }
       } catch (error) {
         console.error('Setup check error:', error);
+        // APIエラーの場合もセットアップチェックを終了
       } finally {
         setCheckingSetup(false);
       }
@@ -65,6 +66,11 @@ export default function LoginPage() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleDemoMode = () => {
+    enableDemoMode();
+    router.push('/dashboard');
   };
 
   if (checkingSetup || authLoading) {
@@ -130,6 +136,24 @@ export default function LoginPage() {
                 className="w-full"
               >
                 Sign In
+              </Button>
+
+              <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-gray-600" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-gray-800 px-2 text-gray-400">or</span>
+                </div>
+              </div>
+
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleDemoMode}
+                className="w-full"
+              >
+                Enter Demo Mode
               </Button>
             </form>
           </CardContent>
