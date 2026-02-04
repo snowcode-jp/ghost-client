@@ -8,7 +8,8 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 
 // API Base URL (Server runs on port 6661)
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6661';
+// Note: Server nests all routes under /api, so we need to include /api in the base URL
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6661') + '/api';
 
 // Token cookie names
 const ACCESS_TOKEN_KEY = 'ghost_access_token';
@@ -308,15 +309,17 @@ class GhostApiClient {
     const accessExpires = new Date(Date.now() + expiresIn * 1000);
     const refreshExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
+    // Note: Using 'lax' for cross-origin API requests
+    // In production with HTTPS, consider using 'none' with secure: true
     Cookies.set(ACCESS_TOKEN_KEY, accessToken, {
       expires: accessExpires,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      secure: window.location.protocol === 'https:',
+      sameSite: 'lax'
     });
     Cookies.set(REFRESH_TOKEN_KEY, refreshToken, {
       expires: refreshExpires,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      secure: window.location.protocol === 'https:',
+      sameSite: 'lax'
     });
   }
 
