@@ -79,12 +79,14 @@ export default function AlertsPage() {
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    const date = new Date(dateStr);
+    // JST (UTC+9) で24時間表記
+    const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    const month = (jstDate.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = jstDate.getUTCDate().toString().padStart(2, '0');
+    const hours = jstDate.getUTCHours().toString().padStart(2, '0');
+    const minutes = jstDate.getUTCMinutes().toString().padStart(2, '0');
+    return `${month}/${day} ${hours}:${minutes}`;
   };
 
   return (

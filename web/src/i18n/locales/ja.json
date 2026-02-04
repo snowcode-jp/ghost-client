@@ -73,7 +73,13 @@
     "settings": "設定",
     "recentSSHAttempts": "最近のSSH攻撃試行",
     "clientStatus": "クライアント状態",
+    "serviceStatus": "サービス状態",
+    "noServicesDetected": "監視中のサービスはありません",
     "language": "言語"
+  },
+  "service": {
+    "running": "稼働中",
+    "stopped": "停止"
   },
   "clients": {
     "title": "クライアント管理",

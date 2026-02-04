@@ -242,6 +242,32 @@ export interface Alert {
   created_at: string;
 }
 
+// エージェント情報
+export interface AgentInfo {
+  agent_id: string;
+  hostname: string;
+  ip_address: string | null;
+  status: 'online' | 'offline' | 'warning';
+  last_seen: string;
+  version: string | null;
+}
+
+// サービス情報
+export interface ServiceInfo {
+  name: string;
+  port: number;
+  status: 'running' | 'stopped' | 'unknown';
+  protocol: string;
+  last_checked: string;
+}
+
+// エージェント付きサービス情報
+export interface ServiceWithAgent {
+  agent_id: string;
+  hostname: string;
+  service: ServiceInfo;
+}
+
 export interface AlertCount {
   total: number;
   info: number;
@@ -584,6 +610,40 @@ class GhostApiClient {
     if (!response.data.success) {
       throw new Error(response.data.error || 'Failed to acknowledge alert');
     }
+  }
+
+  // ==================== Agents & Services ====================
+
+  async getAgents(): Promise<AgentInfo[]> {
+    const response = await this.client.get<ApiResponse<AgentInfo[]>>('/v1/agents');
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get agents');
+    }
+    return response.data.data;
+  }
+
+  async getAgent(agentId: string): Promise<AgentInfo> {
+    const response = await this.client.get<ApiResponse<AgentInfo>>(`/v1/agents/${agentId}`);
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get agent');
+    }
+    return response.data.data;
+  }
+
+  async getAgentServices(agentId: string): Promise<ServiceInfo[]> {
+    const response = await this.client.get<ApiResponse<ServiceInfo[]>>(`/v1/agents/${agentId}/services`);
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get agent services');
+    }
+    return response.data.data;
+  }
+
+  async getAllServices(): Promise<ServiceWithAgent[]> {
+    const response = await this.client.get<ApiResponse<ServiceWithAgent[]>>('/v1/services');
+    if (!response.data.success || !response.data.data) {
+      throw new Error(response.data.error || 'Failed to get services');
+    }
+    return response.data.data;
   }
 
   // ==================== Health ====================

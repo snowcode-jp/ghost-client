@@ -73,7 +73,13 @@
     "settings": "Settings",
     "recentSSHAttempts": "Recent SSH Attempts",
     "clientStatus": "Client Status",
+    "serviceStatus": "Service Status",
+    "noServicesDetected": "No services detected",
     "language": "Language"
+  },
+  "service": {
+    "running": "Running",
+    "stopped": "Stopped"
   },
   "clients": {
     "title": "Client Management",
