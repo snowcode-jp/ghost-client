@@ -258,6 +258,7 @@ export interface ServiceInfo {
   port: number;
   status: 'running' | 'stopped' | 'unknown';
   protocol: string;
+  bind_address: string | null;  // リッスンアドレス (0.0.0.0, 127.0.0.1, etc.)
   last_checked: string;
 }
 

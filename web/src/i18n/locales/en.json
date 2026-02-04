@@ -79,7 +79,9 @@
   },
   "service": {
     "running": "Running",
-    "stopped": "Stopped"
+    "stopped": "Stopped",
+    "global": "Global",
+    "local": "Local"
   },
   "clients": {
     "title": "Client Management",

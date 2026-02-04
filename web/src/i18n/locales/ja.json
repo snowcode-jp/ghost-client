@@ -79,7 +79,9 @@
   },
   "service": {
     "running": "稼働中",
-    "stopped": "停止"
+    "stopped": "停止",
+    "global": "グローバル",
+    "local": "ローカル"
   },
   "clients": {
     "title": "クライアント管理",

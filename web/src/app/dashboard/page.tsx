@@ -297,27 +297,33 @@ export default function DashboardPage() {
               </p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {services.map((svc, index) => (
-                  <div
-                    key={`${svc.agent_id}-${svc.service.port}-${index}`}
-                    className="flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-700"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${svc.service.status === 'running' ? 'bg-green-500' : 'bg-red-500'}`} />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">
-                          {svc.service.name}
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {svc.hostname} • Port {svc.service.port}
-                        </p>
+                {services.map((svc, index) => {
+                  // バインドアドレスの表示を整形
+                  const bindDisplay = svc.service.bind_address === '0.0.0.0' ? t('service.global') :
+                                      svc.service.bind_address === '127.0.0.1' ? t('service.local') :
+                                      svc.service.bind_address || '';
+                  return (
+                    <div
+                      key={`${svc.agent_id}-${svc.service.port}-${index}`}
+                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-3 h-3 rounded-full ${svc.service.status === 'running' ? 'bg-green-500' : 'bg-red-500'}`} />
+                        <div>
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">
+                            {svc.service.name}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            Port {svc.service.port}{bindDisplay && ` • ${bindDisplay}`}
+                          </p>
+                        </div>
                       </div>
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${getServiceStatusColor(svc.service.status)}`}>
+                        {svc.service.status === 'running' ? t('service.running') : t('service.stopped')}
+                      </span>
                     </div>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getServiceStatusColor(svc.service.status)}`}>
-                      {svc.service.status === 'running' ? t('service.running') : t('service.stopped')}
-                    </span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </CardContent>
