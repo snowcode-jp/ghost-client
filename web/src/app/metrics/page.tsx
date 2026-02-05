@@ -266,7 +266,7 @@ export default function MetricsPage() {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 {t('dashboard.attackTypes')}
               </h3>
-              {summary && Object.keys(summary.attack_types).length > 0 ? (
+              {summary && summary.attack_types && Object.keys(summary.attack_types).length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {Object.entries(summary.attack_types).map(([type, count]) => (
                     <div key={type} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">

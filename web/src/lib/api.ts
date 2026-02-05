@@ -225,9 +225,13 @@ export interface MetricsSummary {
   total_attacks: number;
   total_defenses: number;
   total_anomalies: number;
-  attack_types: Record<string, number>;
-  defense_types: Record<string, number>;
-  anomaly_types: Record<string, number>;
+  defense_rate: number;
+  current_attack_count: number;
+  current_defense_count: number;
+  current_anomaly_count: number;
+  attack_types?: Record<string, number>;
+  defense_types?: Record<string, number>;
+  anomaly_types?: Record<string, number>;
 }
 
 // Alert types
